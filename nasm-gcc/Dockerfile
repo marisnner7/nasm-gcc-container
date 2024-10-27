@@ -1,7 +1,11 @@
-FROM debian:jessie
+FROM debian:bookworm
 
 RUN apt-get update -y && apt-get install build-essential gdb nasm vim -y
 
-RUN groupadd -g 999 llp && useradd -r -u 999 -g llp llp
+# recreate group and user with the same UID e GID from host
+RUN groupadd -g 1000 llp && useradd -r -u 1000 -g llp llp
+
 
 USER llp
+
+
